@@ -101,7 +101,7 @@ const ChatContainer = () => {
             <div
               className={`max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-3 rounded-xl shadow-lg backdrop-blur-md border border-gray-700 transition-all duration-300 ${
                 message.senderId === authUser._id
-                  ? "ml-2 bg-fuchsia-600 text-gray-100 shadow-fuchsia-500/50"
+                  ? "ml-2 bg-gray-100 text-gray-800 shadow-gray-700/50"
                   : "mr-2 bg-gray-800 text-gray-300 shadow-gray-700/50"
               }`}
             >
