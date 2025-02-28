@@ -46,6 +46,8 @@ const NoChatSelected = () => {
           </div>
         </div>
 
+        
+
         {/* Welcome Text */}
         <h2 className="text-3xl font-extrabold text-white drop-shadow-lg">Welcome to Chatty!</h2>
         <p className="text-gray-300 text-lg">
