@@ -70,7 +70,7 @@ const ChatContainer = () => {
   }
 
   return (
-    <div className={`flex-1 flex flex-col overflow-auto bg-gradient-to-br ${gradientThemes[themeIndex]} text-gray-100`}>
+    <div className={`mt-15 md:mt-0 h-screen md:h-full flex-1 flex flex-col overflow-auto bg-gradient-to-br ${gradientThemes[themeIndex]} text-gray-100`}>
       <ChatHeader />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

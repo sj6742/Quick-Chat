@@ -20,18 +20,39 @@ const gradientThemes = [
   "from-indigo-900 via-blue-700 to-violet-600",
   "from-pink-700 via-fuchsia-500 to-cyan-400",
   "from-red-800 via-orange-600 to-yellow-400"
-
 ];
 
 const NoChatSelected = () => {
   const [theme, setTheme] = useState(
     gradientThemes[parseInt(localStorage.getItem("themeIndex")) || 0]
   );
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const storedThemeIndex = parseInt(localStorage.getItem("themeIndex")) || 0;
     setTheme(gradientThemes[storedThemeIndex]);
   }, []);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener("resize", checkIfMobile);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", checkIfMobile);
+    };
+  }, []);
+
+  // Return null if on mobile to hide the component completely
+  if (isMobile) return null;
 
   return (
     <div className={`w-full flex flex-1 flex-col items-center justify-center p-16 bg-gradient-to-br ${theme} text-gray-200`}>
@@ -45,8 +66,6 @@ const NoChatSelected = () => {
             </div>
           </div>
         </div>
-
-        
 
         {/* Welcome Text */}
         <h2 className="text-3xl font-extrabold text-white drop-shadow-lg">Welcome to Chatty!</h2>

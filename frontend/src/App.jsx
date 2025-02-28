@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import ChatContainer from "./components/ChatContainer";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
@@ -44,6 +45,7 @@ const App = () => {
         {/* <Route path="/settings" element={<SettingsPage />} /> */}
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
         <Route path="/settings" element={authUser ? <SettingsPage /> : <Navigate to="/" />} />
+        <Route path="/chat" element={<ChatContainer/>}/>
       </Routes>
 
       <Toaster />
