@@ -29,11 +29,11 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-700 to-fuchsia-500 text-gray-100 p-6">
+    <div className="min-h-screen flex items-center justify-center  bg-gray-900/80 bg-gradient-to-br from-blue-900 via-purple-700 to-fuchsia-500 text-gray-100 p-6">
       <div className="w-full mt-20 max-w-lg bg-gray-900/80 p-8 rounded-3xl shadow-2xl backdrop-blur-md border border-gray-700">
         <div className="text-center mb-8">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-14 h-14 rounded-full bg-fuchsia-500 flex items-center justify-center shadow-lg transition-transform transform hover:scale-110">
+            <div className="w-14 h-14 rounded-full  bg-fuchsia-500 flex items-center justify-center shadow-lg transition-transform transform hover:scale-110">
               <MessageSquare className="w-7 h-7 text-white" />
             </div>
             <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">Join Us</h1>
@@ -82,7 +82,10 @@ const SignUpPage = () => {
 
         <div className="text-center mt-4 text-gray-300">
           <p>
-            Already have an account? <Link to="/login" className="text-fuchsia-400 font-bold hover:underline">Sign in</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="text-fuchsia-400 font-bold hover:underline">
+              Sign in
+            </Link>
           </p>
         </div>
       </div>
