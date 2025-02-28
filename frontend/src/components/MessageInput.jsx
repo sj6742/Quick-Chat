@@ -3,36 +3,37 @@ import { useChatStore } from "../store/useChatStore";
 import { Image, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
 
+const gradientThemes = [
+    "from-gray-900 via-purple-800 to-fuchsia-700",
+    "from-blue-900 via-indigo-700 to-purple-600",
+    "from-green-900 via-teal-700 to-blue-500",
+    "from-red-900 via-pink-700 to-yellow-500",
+    "from-black via-gray-800 to-gray-600",
+    "from-green-900 via-lime-700 to-emerald-500",
+    "from-orange-900 via-red-700 to-yellow-500",
+    "from-pink-700 via-purple-600 to-blue-500",
+    "from-yellow-700 via-amber-600 to-orange-500",
+    "from-blue-900 via-cyan-700 to-teal-500",
+    "from-sky-700 via-blue-500 to-cyan-300",
+    "from-red-900 via-orange-700 to-yellow-400",
+    "from-gray-900 via-gray-700 to-gray-500",
+    "from-green-800 via-teal-600 to-cyan-500",
+    "from-rose-800 via-red-600 to-orange-400",
+    "from-indigo-900 via-blue-700 to-violet-600",
+    "from-pink-700 via-fuchsia-500 to-cyan-400",
+    "from-red-800 via-orange-600 to-yellow-400"
+];
+
 const MessageInput = () => {
     const [text, setText] = useState("");
     const [imagePreview, setImagePreview] = useState(null);
+    const [themeIndex, setThemeIndex] = useState(0);
     const fileInputRef = useRef(null);
     const { sendMessage } = useChatStore();
 
     useEffect(() => {
-        const themeIndex = localStorage.getItem("themeIndex") || 0;
-        const gradientThemes = [
-            "from-gray-900 via-purple-800 to-fuchsia-700",
-            "from-blue-900 via-indigo-700 to-purple-600",
-            "from-green-900 via-teal-700 to-blue-500",
-            "from-red-900 via-pink-700 to-yellow-500",
-            "from-black via-gray-800 to-gray-600",
-            "from-green-900 via-lime-700 to-emerald-500",
-            "from-orange-900 via-red-700 to-yellow-500",
-            "from-pink-700 via-purple-600 to-blue-500",
-            "from-yellow-700 via-amber-600 to-orange-500",
-            "from-blue-900 via-cyan-700 to-teal-500",
-            "from-sky-700 via-blue-500 to-cyan-300",
-            "from-red-900 via-orange-700 to-yellow-400",
-            "from-gray-900 via-gray-700 to-gray-500",
-            "from-green-800 via-teal-600 to-cyan-500",
-            "from-rose-800 via-red-600 to-orange-400",
-            "from-indigo-900 via-blue-700 to-violet-600",
-            "from-pink-700 via-fuchsia-500 to-cyan-400",
-            "from-red-800 via-orange-600 to-yellow-400"
-        
-        ];
-        document.body.className = `bg-gradient-to-r ${gradientThemes[themeIndex]}`;
+        const storedThemeIndex = parseInt(localStorage.getItem("themeIndex")) || 0;
+        setThemeIndex(storedThemeIndex);
     }, []);
 
     const handleImageChange = (e) => {
@@ -59,11 +60,7 @@ const MessageInput = () => {
         if (!text.trim() && !imagePreview) return;
 
         try {
-            await sendMessage({
-                text: text.trim(),
-                image: imagePreview,
-            });
-
+            await sendMessage({ text: text.trim(), image: imagePreview });
             setText("");
             setImagePreview(null);
             if (fileInputRef.current) fileInputRef.current.value = "";
@@ -94,10 +91,10 @@ const MessageInput = () => {
             )}
 
             <form onSubmit={handleSendMessage} className="flex items-center gap-3 p-3">
-                <div className="flex-1 flex items-center gap-2 px-4 py-2 rounded-full shadow-md transition focus-within:ring-2 focus-within:ring-blue-400 bg-white">
+                <div className={`flex-1 flex items-center gap-2 px-4 py-2 rounded-full shadow-md transition focus-within:ring-2 focus-within:ring-blue-400 bg-gradient-to-br ${gradientThemes[themeIndex]}`}>
                     <input
                         type="text"
-                        className="w-full bg-transparent outline-none text-gray-700 placeholder-gray-400 text-lg"
+                        className="w-full bg-transparent outline-none text-white placeholder-gray-300"
                         placeholder="Type a message..."
                         value={text}
                         onChange={(e) => setText(e.target.value)}
