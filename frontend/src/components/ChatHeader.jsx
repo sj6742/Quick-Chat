@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
@@ -11,9 +11,9 @@ const ChatHeader = () => {
   return (
     <div className="p-3 border-b border-base-300 bg-base-200 shadow-md">
       <div className="flex items-center justify-between">
-        {/* Left Section - Profile */}
+        
         <div className="flex items-center gap-3">
-          {/* Avatar with Online Indicator */}
+          
           <div className="relative w-12 h-12">
             <img
               src={selectedUser.profilePic || "/avatar.png"}
@@ -25,7 +25,7 @@ const ChatHeader = () => {
             )}
           </div>
 
-          {/* User Info */}
+          
           <div>
             <h3 className="font-semibold text-lg text-base-content">
               {selectedUser.fullName}
@@ -41,7 +41,7 @@ const ChatHeader = () => {
           </div>
         </div>
 
-        {/* Close Button with Hover Effect */}
+              
         <button
           onClick={() => setSelectedUser(null)}
           className="p-2 rounded-full hover:bg-red-500/10 transition"
