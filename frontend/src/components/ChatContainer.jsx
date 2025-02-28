@@ -1,6 +1,5 @@
 import { useChatStore } from "../store/useChatStore";
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
@@ -18,6 +17,30 @@ const ChatContainer = () => {
   } = useChatStore();
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
+  const [themeIndex, setThemeIndex] = useState(
+    parseInt(localStorage.getItem("themeIndex")) || 0
+  );
+  const gradientThemes = [
+    "from-gray-900 via-purple-800 to-fuchsia-700",
+    "from-blue-900 via-indigo-700 to-purple-600",
+    "from-green-900 via-teal-700 to-blue-500",
+    "from-red-900 via-pink-700 to-yellow-500",
+    "from-black via-gray-800 to-gray-600",
+    "from-green-900 via-lime-700 to-emerald-500",
+    "from-orange-900 via-red-700 to-yellow-500",
+    "from-pink-700 via-purple-600 to-blue-500",
+    "from-yellow-700 via-amber-600 to-orange-500",
+    "from-blue-900 via-cyan-700 to-teal-500",
+    "from-sky-700 via-blue-500 to-cyan-300",
+    "from-red-900 via-orange-700 to-yellow-400",
+    "from-gray-900 via-gray-700 to-gray-500",
+    "from-green-800 via-teal-600 to-cyan-500",
+    "from-rose-800 via-red-600 to-orange-400",
+    "from-indigo-900 via-blue-700 to-violet-600",
+    "from-pink-700 via-fuchsia-500 to-cyan-400",
+    "from-red-800 via-orange-600 to-yellow-400"
+
+  ];
 
   useEffect(() => {
     getMessages(selectedUser._id);
@@ -31,9 +54,14 @@ const ChatContainer = () => {
     }
   }, [messages]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", gradientThemes[themeIndex]);
+    document.body.className = `bg-gradient-to-r ${gradientThemes[themeIndex]}`;
+  }, [themeIndex]);
+
   if (isMessagesLoading) {
     return (
-      <div className="flex-1 flex flex-col overflow-auto bg-gradient-to-br from-gray-900 via-purple-800 to-fuchsia-700 text-gray-100">
+      <div className={`flex-1 flex flex-col overflow-auto bg-gradient-to-br ${gradientThemes[themeIndex]} text-gray-100`}>
         <ChatHeader />
         <MessageSkeleton />
         <MessageInput />
@@ -42,7 +70,7 @@ const ChatContainer = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-auto bg-gradient-to-br from-gray-900 via-purple-800 to-fuchsia-700 text-gray-100">
+    <div className={`flex-1 flex flex-col overflow-auto bg-gradient-to-br ${gradientThemes[themeIndex]} text-gray-100`}>
       <ChatHeader />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

@@ -9,6 +9,31 @@ const Sidebar = () => {
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
   const [popupUser, setPopupUser] = useState(null);
+  const [themeIndex, setThemeIndex] = useState(
+    parseInt(localStorage.getItem("themeIndex")) || 0
+  );
+
+  const gradientThemes = [
+    "from-gray-900 via-purple-800 to-fuchsia-700",
+    "from-blue-900 via-indigo-700 to-purple-600",
+    "from-green-900 via-teal-700 to-blue-500",
+    "from-red-900 via-pink-700 to-yellow-500",
+    "from-black via-gray-800 to-gray-600",
+    "from-green-900 via-lime-700 to-emerald-500",
+    "from-orange-900 via-red-700 to-yellow-500",
+    "from-pink-700 via-purple-600 to-blue-500",
+    "from-yellow-700 via-amber-600 to-orange-500",
+    "from-blue-900 via-cyan-700 to-teal-500",
+    "from-sky-700 via-blue-500 to-cyan-300",
+    "from-red-900 via-orange-700 to-yellow-400",
+    "from-gray-900 via-gray-700 to-gray-500",
+    "from-green-800 via-teal-600 to-cyan-500",
+    "from-rose-800 via-red-600 to-orange-400",
+    "from-indigo-900 via-blue-700 to-violet-600",
+    "from-pink-700 via-fuchsia-500 to-cyan-400",
+    "from-red-800 via-orange-600 to-yellow-400"
+
+  ];
 
   useEffect(() => {
     getUsers();
@@ -24,12 +49,16 @@ const Sidebar = () => {
     }
   }, [newMessage, selectedUser, users]);
 
+  useEffect(() => {
+    document.body.className = `bg-gradient-to-r ${gradientThemes[themeIndex]}`;
+  }, [themeIndex]);
+
   const filteredUsers = showOnlineOnly ? users.filter(user => onlineUsers.includes(user._id)) : users;
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
   return (
-    <aside className="h-full w-20 lg:w-72 border-r border-gray-700 bg-gradient-to-br from-gray-900 via-purple-800 to-fuchsia-700 shadow-lg backdrop-blur-md p-4 flex flex-col transition-all duration-200 relative">
+    <aside className={`h-full w-20 lg:w-72 border-r border-gray-700 bg-gradient-to-br ${gradientThemes[themeIndex]} shadow-lg backdrop-blur-md p-4 flex flex-col transition-all duration-200 relative`}>
       
       {/* Sidebar Header */}
       <div className="border-b border-gray-700 pb-4 w-full">
