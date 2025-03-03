@@ -33,32 +33,26 @@ const NoChatSelected = () => {
     setTheme(gradientThemes[storedThemeIndex]);
   }, []);
 
-  // Check if device is mobile
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
-    // Initial check
     checkIfMobile();
     
-    // Add event listener for window resize
     window.addEventListener("resize", checkIfMobile);
     
-    // Cleanup
     return () => {
       window.removeEventListener("resize", checkIfMobile);
     };
   }, []);
 
-  // Return null if on mobile to hide the component completely
   if (isMobile) return null;
 
   return (
     <div className={`w-full flex flex-1 flex-col items-center justify-center p-16 bg-gradient-to-br ${theme} text-gray-200`}>
       <div className="max-w-md text-center space-y-6 bg-gray-900/80 p-8 rounded-3xl shadow-2xl backdrop-blur-md border border-gray-700">
         
-        {/* Icon Display */}
         <div className="flex justify-center">
           <div className="relative">
             <div className="w-16 h-16 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center animate-bounce shadow-lg transition-transform transform hover:scale-110">
