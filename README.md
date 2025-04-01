@@ -16,7 +16,7 @@ Chattyfy is a lightweight, real-time chat application designed for seamless comm
 
 ## Features
 - Real-time messaging without a backend
-- 32 customizable themes
+- 18 customizable themes
 - Responsive design for mobile and desktop
 - User-friendly interface
 - Lightweight and fast
